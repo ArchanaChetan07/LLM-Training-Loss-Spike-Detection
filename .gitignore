@@ -1,0 +1,11 @@
+# raw/processed telemetry (re-fetch with scripts/fetch_olmo.py; ~0.7 GB)
+data/
+# regenerable per-step alarm traces
+results/olmo_alarms/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.ipynb_checkpoints/

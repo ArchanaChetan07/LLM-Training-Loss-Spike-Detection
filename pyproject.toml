@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spikewatch"
+version = "0.1.0"
+description = "Anytime-valid early warning for loss spikes in LLM pre-training, with formal false-alarm guarantees."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Archana Suresh Patil" }]
+dependencies = ["numpy>=1.24", "scipy>=1.10", "pandas>=2.0", "pyarrow>=14", "matplotlib>=3.7"]
+
+[project.optional-dependencies]
+fetch = ["wandb>=0.16"]
+train = ["torch>=2.2"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
