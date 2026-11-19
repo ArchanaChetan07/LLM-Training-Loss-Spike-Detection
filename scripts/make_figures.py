@@ -36,10 +36,10 @@ BURN, CAL_END = 10_000, 250_000
 ALPHAS = [0.005, 0.01, 0.02, 0.05, 0.1, 0.2]
 
 
-def held_out():
+def held_out(scored):
     out = {}
     for s in ["OLMo-1B", "OLMo-7B", "OLMo-1.7-7B", "OLMo-2-7B"]:
-        if not run_dirs(s):
+        if s not in scored or not run_dirs(s):  # only series scored in results/olmo_eval.json
             continue
         p = prepare(s, load_series(s), BURN)
         steps = p.df.step.to_numpy()
@@ -143,13 +143,14 @@ def fig_transfer(res):
 def fig_lead(res, small=None):
     leads = [x for s in res["series"].values() for x in s["test"]["G-rate"]["lead_onset"] if x is not None]
     fig, ax = plt.subplots(figsize=(5.8, 3.4))
-    bins = np.arange(-10.5, max(30, max(leads, default=0)) + 1.5, 1)
+    bins = np.arange(-10.5, 61.5, 1)  # leads clipped to [-10, 60]
     ax.hist(np.clip(leads, -10, 60), bins=bins, color=C["av"], label=f"OLMo held-out (n={len(leads)})", alpha=0.9)
     if small:
         sl = small["configs"]["G-rate"]["test"]["lead_onset"]
         ax.hist(np.clip(sl, -10, 60), bins=bins, color=C["z"], alpha=0.6, label=f"own runs (n={len(sl)})")
     ax.axvline(0.5, color=C["muted"], ls=":", lw=1)
-    ax.set_xlabel("lead time to onset (steps; >0 = warned before the spike)")
+    ax.set_xlim(-11, 62)
+    ax.set_xlabel("lead time to onset (steps; >0 = warned before the spike; 60 = ≥60)")
     ax.set_ylabel("spikes")
     ax.legend(frameon=False, fontsize=8)
     fig.savefig(FIG / "fig5_leadtime.png"); plt.close(fig)
@@ -160,7 +161,7 @@ def main():
     cals = cal_from_json(json.loads((ROOT / "results/calibration.json").read_text())["calibrators"])
     res = json.loads((ROOT / "results/olmo_eval.json").read_text())
     small = json.loads((ROOT / "results/small_eval.json").read_text()) if (ROOT / "results/small_eval.json").exists() else None
-    ho = held_out()
+    ho = held_out(res["series"])
     p, m = ho["OLMo-1B"]
     eps = [e for e in p.major if m[e.onset]] or p.major
     ep = max(eps, key=lambda e: e.severity)

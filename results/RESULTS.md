@@ -4,33 +4,33 @@
 
 | | spikes M | detected N | ≥1 step before onset | median lead to onset | median lead to peak | window FA rate |
 |---|---|---|---|---|---|---|
-| OLMo-1B (steps > 250k) | 0 | 0 | 0 | – | – | 3.8% |
-| OLMo-7B | not available | | | | | |
-| OLMo-1.7-7B | not available | | | | | |
+| OLMo-1B (steps > 250k) | 0 | 0 | 0 | – | – | 3.8% (15/396; CI 2.1–6.2%) |
+| OLMo-7B | 8 | 6 | 1 | +0 | +0 | 4.6% (25/547; CI 3.0–6.7%) |
+| OLMo-1.7-7B | 63 | 48 | 8 | -1 | +0 | 5.6% (23/408; CI 3.6–8.3%) |
 | OLMo-2-7B | not available | | | | | |
 
-* FA ≤ 5% on every held-out series: **yes** (OLMo-1B 3.8%)
-* Pooled N_ahead / M = 0/0 = nan% (pre-registered bar: ≥ 50%)
-* **Pre-registered success: NOT MET**
+* FA ≤ 5% on every held-out series: **no** (OLMo-1B 3.8%, OLMo-7B 4.6%, OLMo-1.7-7B 5.6%)
+* Pooled N_ahead / M = 9/71 = 12.7% (pre-registered bar: ≥ 50%)
+* **Pre-registered success: NOT MET** — falsified on the FA criterion (guarantee did not transfer everywhere)
 
 ## Calibration split (OLMo-1B steps 10k–250k; in-sample for ρ and baseline tuning)
 
 | | spikes M | detected N | ≥1 step before onset | median lead to onset | median lead to peak | window FA rate |
 |---|---|---|---|---|---|---|
-| G-rate | 8 | 8 | 4 | +3 | +8 | 2.1% |
-| G-run | 8 | 8 | 4 | +0 | +6 | 0.4% |
-| rho1_G-rate | 8 | 8 | 4 | +4 | +8 | 3.8% |
-| optim_only_G-rate | 8 | 8 | 1 | -4 | -2 | 3.0% |
-| zscore_tuned | 8 | 8 | 5 | +9 | +12 | 2.5% |
-| zscore_7sigma | 8 | 8 | 6 | +16 | +18 | 59.3% |
-| cusum_tuned | 8 | 8 | 4 | +2 | +8 | 0.4% |
-| only_loss | 8 | 8 | 4 | +1 | +7 | 2.5% |
-| only_clip | 8 | 8 | 4 | +2 | +7 | 1.7% |
-| only_gnorm | 8 | 8 | 1 | -7 | -2 | 1.7% |
-| only_gmax | 8 | 7 | 0 | -5 | -1 | 1.3% |
-| only_uratio | 8 | 5 | 1 | -4 | -4 | 2.5% |
-| only_stale | 8 | 4 | 1 | -6 | -3 | 0.8% |
-| only_curv | 8 | 4 | 1 | -4 | +6 | 0.0% |
+| G-rate | 8 | 8 | 4 | +3 | +8 | 2.1% (5/236; CI 0.7–4.9%) |
+| G-run | 8 | 8 | 4 | +0 | +6 | 0.4% (1/236; CI 0.0–2.3%) |
+| rho1_G-rate | 8 | 8 | 4 | +4 | +8 | 3.8% (9/236; CI 1.8–7.1%) |
+| optim_only_G-rate | 8 | 8 | 1 | -4 | -2 | 3.0% (7/236; CI 1.2–6.0%) |
+| zscore_tuned | 8 | 8 | 5 | +9 | +12 | 2.5% (6/236; CI 0.9–5.5%) |
+| zscore_7sigma | 8 | 8 | 6 | +16 | +18 | 59.3% (140/236; CI 52.8–65.6%) |
+| cusum_tuned | 8 | 8 | 4 | +2 | +8 | 0.4% (1/236; CI 0.0–2.3%) |
+| only_loss | 8 | 8 | 4 | +1 | +7 | 2.5% (6/236; CI 0.9–5.5%) |
+| only_clip | 8 | 8 | 4 | +2 | +7 | 1.7% (4/236; CI 0.5–4.3%) |
+| only_gnorm | 8 | 8 | 1 | -7 | -2 | 1.7% (4/236; CI 0.5–4.3%) |
+| only_gmax | 8 | 7 | 0 | -5 | -1 | 1.3% (3/236; CI 0.3–3.7%) |
+| only_uratio | 8 | 5 | 1 | -4 | -4 | 2.5% (6/236; CI 0.9–5.5%) |
+| only_stale | 8 | 4 | 1 | -6 | -3 | 0.8% (2/236; CI 0.1–3.0%) |
+| only_curv | 8 | 4 | 1 | -4 | +6 | 0.0% (0/236; CI 0.0–1.6%) |
 
 ## Held-out comparison: every configuration
 
@@ -38,20 +38,58 @@
 
 | | spikes M | detected N | ≥1 step before onset | median lead to onset | median lead to peak | window FA rate |
 |---|---|---|---|---|---|---|
-| G-rate | 0 | 0 | 0 | – | – | 3.8% |
-| G-run | 0 | 0 | 0 | – | – | 0.5% |
-| rho1_G-rate | 0 | 0 | 0 | – | – | 5.1% |
-| optim_only_G-rate | 0 | 0 | 0 | – | – | 1.8% |
-| zscore_tuned | 0 | 0 | 0 | – | – | 10.6% |
-| zscore_7sigma | 0 | 0 | 0 | – | – | 74.0% |
-| cusum_tuned | 0 | 0 | 0 | – | – | 3.0% |
-| only_loss | 0 | 0 | 0 | – | – | 4.5% |
-| only_clip | 0 | 0 | 0 | – | – | 2.3% |
-| only_gnorm | 0 | 0 | 0 | – | – | 1.5% |
-| only_gmax | 0 | 0 | 0 | – | – | 1.0% |
-| only_uratio | 0 | 0 | 0 | – | – | 1.8% |
-| only_stale | 0 | 0 | 0 | – | – | 1.0% |
-| only_curv | 0 | 0 | 0 | – | – | 0.3% |
+| G-rate | 0 | 0 | 0 | – | – | 3.8% (15/396; CI 2.1–6.2%) |
+| G-run | 0 | 0 | 0 | – | – | 0.5% (2/396; CI 0.1–1.8%) |
+| rho1_G-rate | 0 | 0 | 0 | – | – | 5.1% (20/396; CI 3.1–7.7%) |
+| optim_only_G-rate | 0 | 0 | 0 | – | – | 1.8% (7/396; CI 0.7–3.6%) |
+| zscore_tuned | 0 | 0 | 0 | – | – | 10.6% (42/396; CI 7.8–14.1%) |
+| zscore_7sigma | 0 | 0 | 0 | – | – | 74.0% (293/396; CI 69.4–78.2%) |
+| cusum_tuned | 0 | 0 | 0 | – | – | 3.0% (12/396; CI 1.6–5.2%) |
+| only_loss | 0 | 0 | 0 | – | – | 4.5% (18/396; CI 2.7–7.1%) |
+| only_clip | 0 | 0 | 0 | – | – | 2.3% (9/396; CI 1.0–4.3%) |
+| only_gnorm | 0 | 0 | 0 | – | – | 1.5% (6/396; CI 0.6–3.3%) |
+| only_gmax | 0 | 0 | 0 | – | – | 1.0% (4/396; CI 0.3–2.6%) |
+| only_uratio | 0 | 0 | 0 | – | – | 1.8% (7/396; CI 0.7–3.6%) |
+| only_stale | 0 | 0 | 0 | – | – | 1.0% (4/396; CI 0.3–2.6%) |
+| only_curv | 0 | 0 | 0 | – | – | 0.3% (1/396; CI 0.0–1.4%) |
+
+### OLMo-7B
+
+| | spikes M | detected N | ≥1 step before onset | median lead to onset | median lead to peak | window FA rate |
+|---|---|---|---|---|---|---|
+| G-rate | 8 | 6 | 1 | +0 | +0 | 4.6% (25/547; CI 3.0–6.7%) |
+| G-run | 8 | 4 | 0 | -2 | -2 | 0.7% (4/547; CI 0.2–1.9%) |
+| rho1_G-rate | 8 | 6 | 1 | +0 | +0 | 5.9% (32/547; CI 4.0–8.2%) |
+| optim_only_G-rate | 8 | 3 | 0 | -8 | -8 | 4.8% (26/547; CI 3.1–6.9%) |
+| zscore_tuned | 8 | 7 | 3 | +0 | +0 | 22.5% (123/547; CI 19.1–26.2%) |
+| zscore_7sigma | 8 | 8 | 6 | +94 | +94 | 86.5% (473/547; CI 83.3–89.2%) |
+| cusum_tuned | 8 | 6 | 0 | -1 | -1 | 1.1% (6/547; CI 0.4–2.4%) |
+| only_loss | 8 | 5 | 1 | -1 | -1 | 4.0% (22/547; CI 2.5–6.0%) |
+| only_clip | 8 | 1 | 0 | -8 | -8 | 3.5% (19/547; CI 2.1–5.4%) |
+| only_gnorm | 8 | 3 | 1 | -8 | -8 | 5.1% (28/547; CI 3.4–7.3%) |
+| only_gmax | 8 | 3 | 0 | -8 | -8 | 4.6% (25/547; CI 3.0–6.7%) |
+| only_uratio | 8 | 0 | 0 | – | – | 1.6% (9/547; CI 0.8–3.1%) |
+| only_stale | 8 | 1 | 0 | -8 | -8 | 2.6% (14/547; CI 1.4–4.3%) |
+| only_curv | 8 | 0 | 0 | – | – | 2.0% (11/547; CI 1.0–3.6%) |
+
+### OLMo-1.7-7B
+
+| | spikes M | detected N | ≥1 step before onset | median lead to onset | median lead to peak | window FA rate |
+|---|---|---|---|---|---|---|
+| G-rate | 63 | 48 | 8 | -1 | +0 | 5.6% (23/408; CI 3.6–8.3%) |
+| G-run | 63 | 35 | 5 | -2 | -2 | 2.5% (10/408; CI 1.2–4.5%) |
+| rho1_G-rate | 63 | 48 | 9 | +0 | +0 | 6.6% (27/408; CI 4.4–9.5%) |
+| optim_only_G-rate | 63 | 14 | 4 | -6 | +2 | 3.2% (13/408; CI 1.7–5.4%) |
+| zscore_tuned | 63 | 55 | 27 | +0 | +3 | 48.8% (199/408; CI 43.8–53.7%) |
+| zscore_7sigma | 63 | 63 | 56 | +48 | +48 | 97.3% (397/408; CI 95.2–98.6%) |
+| cusum_tuned | 63 | 49 | 5 | +0 | +0 | 3.2% (13/408; CI 1.7–5.4%) |
+| only_loss | 63 | 41 | 6 | -1 | -1 | 5.1% (21/408; CI 3.2–7.8%) |
+| only_clip | 63 | 16 | 3 | -11 | -8 | 4.7% (19/408; CI 2.8–7.2%) |
+| only_gnorm | 63 | 18 | 4 | -10 | -1 | 2.5% (10/408; CI 1.2–4.5%) |
+| only_gmax | 63 | 14 | 3 | -10 | -2 | 2.5% (10/408; CI 1.2–4.5%) |
+| only_uratio | 63 | 1 | 1 | +13 | +13 | 1.2% (5/408; CI 0.4–2.8%) |
+| only_stale | 63 | 10 | 2 | -11 | +0 | 1.5% (6/408; CI 0.5–3.2%) |
+| only_curv | 63 | 6 | 2 | -6 | +4 | 0.7% (3/408; CI 0.2–2.1%) |
 
 ## Tuned baselines
 
